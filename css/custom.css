@@ -13,12 +13,9 @@ body { font-size: 12px; color: black; }
 @media (min-width: 1200px) { body { font-size: 18px; } }
 @media (min-width: 1400px) { body { font-size: 20px; } }
 
-
-.icon-link img {
-  width: 10em;
-  height: 10em;
+html {
+  background: orange
 }
-
 
 .github, .resume {
   background-color: orange;
@@ -28,7 +25,10 @@ body { font-size: 12px; color: black; }
   background-color: red;
 }
 
-.content {
+
+.icon-link img {
+  width: 10em;
+  height: 10em;
 }
 
 .pane {
@@ -113,6 +113,39 @@ body { font-size: 12px; color: black; }
 
   .resume {
     background-color: red;
+  }
+}
+
+/* vertical style for portrait tablets & squat computers */
+@media (min-width: 420px) and (max-width: 800px) and (min-height: 480px) {
+  body { font-size: 10px; }
+  @media (min-height: 500px) { body { font-size: 11px; } }
+  @media (min-height: 550px) { body { font-size: 12px; } }
+  @media (min-height: 600px) { body { font-size: 13px; } }
+  @media (min-height: 650px) { body { font-size: 14px; } }
+  @media (min-height: 700px) { body { font-size: 15px; } }
+  @media (min-height: 750px) { body { font-size: 16px; } }
+  @media (min-height: 800px) { body { font-size: 17px; } }
+  @media (min-height: 850px) { body { font-size: 18px; } }
+  @media (min-height: 900px) { body { font-size: 19px; } }
+  @media (min-height: 950px) { body { font-size: 20px; } }
+  @media (min-height: 1000px) { body { font-size: 21px; } }
+
+  .name span {
+    left: 0.25em;
+    padding-bottom: 2em;
+  }
+
+  .overlay {
+    position: absolute;
+
+    width: 25em;
+    left: 50%;
+    margin-left: -12.5em;
+
+    height: 45em;
+    top: 50%;
+    margin-top: -22.5em;
   }
 
 }
