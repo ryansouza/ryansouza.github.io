@@ -2,7 +2,7 @@
 #
 
 widths = (420..3000).step(50).to_a
-tall_heights = widths.map {|width| (width * 1.1).to_i }
+tall_heights = widths.map {|width| (width * 1.0).to_i }
 wide_heights = widths.map {|width| (width * 0.8).to_i }
 
 tall_sizes = widths.zip tall_heights
@@ -26,4 +26,59 @@ end.join(', ')
 puts "For tall layout:"
 puts ""
 puts "@media (max-width: 420px) and (min-height: 640px), #{tall_queries} {"
+puts
 
+puts "Guides:"
+guides = tall_sizes[0..-1].zip(tall_sizes[1..-1]).map do |(start,finish)|
+  if start && finish
+    %Q(<div class="guides" style="left: 0px; width: #{finish[0]}px; top: 0px; height: #{start[1]}px;"></div>)
+  else
+    nil
+  end
+end.compact.join "\n"
+puts guides
+puts
+
+width = {
+}
+
+def font_sizes(desc)
+  desc[:sizes].step(desc[:step]).map do |size|
+    [size, ((size - desc[:base]) / desc[:step]).round(2)]
+  end.map do |(size, i)|
+    [size, (desc[:increase] * i + 1.0).round(3)]
+  end
+=begin
+  desc[:sizes].step(desc[:step]).map do |size|
+    [size, ((size - desc[:base]) / desc[:step]).round(2)]
+  end.map do |(size, i)|
+    [size, (desc[:power] ** i).round(3)]
+  end
+=end
+end
+
+width_font_sizes = font_sizes({
+  sizes: 0..4000,
+  step: 100,
+  base: 1000,
+  increase: 0.075,
+})
+
+height_font_sizes = font_sizes({
+  sizes: 0..2000,
+  step: 100,
+  base: 600,
+  increase: 0.05,
+})
+
+
+#width_font_sizes = (0..4000).step(125).zip (0.8 .. 4.0).step(0.1).map {|float| float.round(2) }
+#height_font_sizes = (0..3000).step(125).zip (0.6 .. 2.2).step(0.05).map {|float| float.round(2) }
+
+puts "Width-based font ratios:"
+puts width_font_sizes.map {|(width,ratio)| "@media (min-width: #{width}px) { body { font-size: #{ratio}em; } }" }.join("\n")
+puts
+
+puts "Height-based font ratios:"
+puts height_font_sizes.map {|(width,ratio)| "@media (min-height: #{width}px) { html { font-size: #{ratio}em; } }" }.join("\n")
+puts
