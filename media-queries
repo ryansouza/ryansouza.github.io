@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+#
+
+widths = (420..3000).step(50).to_a
+tall_heights = widths.map {|width| (width * 1.1).to_i }
+wide_heights = widths.map {|width| (width * 0.8).to_i }
+
+tall_sizes = widths.zip tall_heights
+wide_sizes = widths.zip wide_heights
+
+tall_queries = tall_sizes[0..-1].zip(tall_sizes[1..-1]).map do |(start,finish)|
+  min_width = "(min-width: #{start[0]}px)"
+  max_width = finish && "(max-width: #{finish[0]}px)"
+  height = "(min-height: #{start[1]}px)"
+  [min_width, max_width, height].compact.join ' and '
+end.join(', ')
+
+wide_queries = wide_sizes[0..-1].zip(wide_sizes[1..-1]).map do |(start,finish)|
+  min_width = "(min-width: #{start[0]}px)"
+  max_width = finish && "(max-width: #{finish[0]}px)"
+  height = "(max-height: #{start[1]}px)"
+  [min_width, max_width, height].compact.join ' and '
+end.join(', ')
+
+
+puts "For tall layout:"
+puts ""
+puts "@media (max-width: 420px) and (min-height: 640px), #{tall_queries} {"
+
