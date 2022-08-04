@@ -1,6 +1,14 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  src: url(Lobster-Regular.ttf) format('ttf');
+}
+
 body { color: black; }
 
 .guides {
