@@ -6,7 +6,7 @@
   font-family: 'Lobster';
   font-style: normal;
   font-weight: 400;
-  src: url(Lobster-Regular.ttf) format('ttf');
+  src: url(Lobster-Regular.ttf);
 }
 
 body { color: black; }
